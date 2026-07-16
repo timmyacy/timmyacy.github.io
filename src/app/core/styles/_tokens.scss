@@ -1,0 +1,27 @@
+// Design tokens — shared across every component.
+// Import with: @use 'app/core/styles/tokens' as t;
+
+$paper:      #EFEDE6;
+$ink:        #181B20;
+$ink-soft:   #4A4E56;
+$rule:       #C7C2B4;
+$gain:       #2F6F4E;
+$loss:       #A8452F;
+$panel:      #E6E2D6;
+$panel-dark: #181B20;
+
+$font-serif: 'Source Serif 4', Georgia, serif;
+$font-mono:  'IBM Plex Mono', monospace;
+
+@mixin mono($size: 12px) {
+  font-family: $font-mono;
+  font-size: $size;
+}
+
+@mixin section-label {
+  @include mono(12px);
+  color: $ink-soft;
+  display: flex;
+  justify-content: space-between;
+  padding: 36px 0 16px;
+}
