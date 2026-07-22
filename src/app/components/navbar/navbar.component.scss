@@ -1,0 +1,35 @@
+@use '../../core/styles/tokens' as t;
+
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: t.$paper;
+  border-bottom: 2px solid t.$ink;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 28px;
+}
+
+.navbrand { font-weight: 600; font-size: 1.05rem; text-decoration: none; color: t.$ink; }
+
+.navlinks {
+  @include t.mono(12.5px);
+  display: flex;
+  gap: 22px;
+
+  a {
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    &:hover { border-bottom: 1px solid t.$ink; }
+  }
+}
+
+.navcta {
+  @include t.mono(12px);
+  background: t.$ink;
+  color: t.$paper;
+  padding: 7px 14px;
+  text-decoration: none;
+}
