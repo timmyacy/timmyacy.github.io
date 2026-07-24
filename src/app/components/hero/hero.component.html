@@ -1,0 +1,20 @@
+<div class="hero">
+  <h1>Free market data and pricing tools, built from scratch.</h1>
+  <p>
+    Live prices across equities, FX and crypto, plus the option pricing engines
+    and risk systems I've built (Black-Scholes, jump-diffusion, FX Greeks
+    aggregation). Below there's also a live feed of the actual commits going
+    into these projects, pulled straight from GitHub. All free to use.
+  </p>
+
+  <div id="markets" class="ticker-grid">
+    <div class="tick-cell" *ngFor="let t of tickers">
+      <div class="sym">{{ t.symbol }}</div>
+      <div class="px">{{ t.price }}</div>
+      <div class="chg" [class.up]="t.trend === 'up'" [class.down]="t.trend === 'down'">
+        {{ t.trend === 'up' ? '▲' : '▼' }} {{ t.changePct }}
+      </div>
+      <canvas #spark></canvas>
+    </div>
+  </div>
+</div>
