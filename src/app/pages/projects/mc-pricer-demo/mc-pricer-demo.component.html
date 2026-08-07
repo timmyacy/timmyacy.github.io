@@ -1,0 +1,83 @@
+<app-project-demo-shell
+  title="MC-Pricer"
+  tagline="A Monte Carlo options engine covering five payoff types: European, Binary, Asian, Barrier and Lookback. Simulated via Geometric Brownian Motion paths with a Box-Muller normal generator and optional antithetic variance reduction. Same algorithm as the C++ CLI, ported into TypeScript and running here in your browser."
+  [repoUrl]="repoUrl"
+>
+  <div class="calc">
+    <div class="calc-form">
+      <label>Option type</label>
+      <select [(ngModel)]="kind">
+        <option value="european">European</option>
+        <option value="binary">Binary (Digital)</option>
+        <option value="asian">Asian</option>
+        <option value="barrier">Barrier (knock-out)</option>
+        <option value="lookback">Lookback</option>
+      </select>
+
+      <label>Call / Put</label>
+      <select [(ngModel)]="type">
+        <option value="call">Call</option>
+        <option value="put">Put</option>
+      </select>
+
+      <label>Spot</label>
+      <input type="number" [(ngModel)]="spot" step="1">
+
+      <label>Strike</label>
+      <input type="number" [(ngModel)]="strike" step="1">
+
+      <label>Maturity (years)</label>
+      <input type="number" [(ngModel)]="maturity" step="0.1">
+
+      <label>Rate (%)</label>
+      <input type="number" [(ngModel)]="ratePct" step="0.5">
+
+      <label>Volatility (%)</label>
+      <input type="number" [(ngModel)]="volPct" step="1">
+
+      <label>Simulations (max 50,000)</label>
+      <input type="number" [(ngModel)]="simulations" step="1000" max="50000">
+
+      <ng-container *ngIf="isPathDependent">
+        <label>Time steps (max 252)</label>
+        <input type="number" [(ngModel)]="numSteps" step="1" max="252">
+      </ng-container>
+
+      <ng-container *ngIf="isBarrier">
+        <label>Barrier level</label>
+        <input type="number" [(ngModel)]="barrier" step="1">
+      </ng-container>
+
+      <label class="checkbox-label">
+        <input type="checkbox" [(ngModel)]="antithetic"> Antithetic variance reduction
+      </label>
+
+      <button type="button" (click)="run()" [disabled]="running">{{ running ? 'Running…' : 'Run simulation' }}</button>
+    </div>
+
+    <div class="calc-result" *ngIf="result as r">
+      <div class="price-row">
+        <div class="price-block">
+          <div class="lbl">MC PRICE</div>
+          <div class="price">{{ r.price | number: '1.3-3' }}</div>
+          <div class="ci mono">95% CI [{{ r.ci95[0] | number: '1.3-3' }}, {{ r.ci95[1] | number: '1.3-3' }}] &middot; SE {{ r.stdError | number: '1.4-4' }}</div>
+        </div>
+        <div class="price-block secondary" *ngIf="hasClosedForm && r.closedForm !== undefined">
+          <div class="lbl">CLOSED-FORM BENCHMARK</div>
+          <div class="price small">{{ r.closedForm | number: '1.3-3' }}</div>
+          <div class="ci mono">error {{ (r.price - r.closedForm) | number: '1.4-4' }}</div>
+        </div>
+      </div>
+
+      <div class="chart-block">
+        <div class="lbl">CONVERGENCE (running discounted-payoff average vs. simulation count)</div>
+        <canvas #conv></canvas>
+      </div>
+
+      <div class="chart-block" *ngIf="isPathDependent">
+        <div class="lbl">SAMPLE PATHS ({{ r.samplePaths.length }} of {{ simulations }} simulations shown{{ isBarrier ? ' · dashed line = barrier' : '' }})</div>
+        <canvas #paths></canvas>
+      </div>
+    </div>
+  </div>
+</app-project-demo-shell>
