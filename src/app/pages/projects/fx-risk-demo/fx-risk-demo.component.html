@@ -1,0 +1,44 @@
+<app-project-demo-shell
+  title="FX Risk Aggregator"
+  tagline="Garman-Kohlhagen pricing over a small book of FX option positions, rolled up into portfolio-level Greeks. The real repo's Python service uses a Pydantic data layer for the same aggregation. This demo runs the identical math client-side."
+  [repoUrl]="repoUrl"
+>
+  <div class="book">
+    <table>
+      <thead>
+        <tr>
+          <th>Pair</th><th>Type</th><th>Spot</th><th>Strike</th><th>Maturity (y)</th>
+          <th>Dom. r</th><th>For. r</th><th>Vol</th><th>Notional</th><th>Premium</th><th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of positions; let i = index; let last = last">
+          <td><input class="mono" [(ngModel)]="row.pair"></td>
+          <td>
+            <select [(ngModel)]="row.inputs.type">
+              <option value="call">Call</option>
+              <option value="put">Put</option>
+            </select>
+          </td>
+          <td><input type="number" step="0.01" [(ngModel)]="row.inputs.spot"></td>
+          <td><input type="number" step="0.01" [(ngModel)]="row.inputs.strike"></td>
+          <td><input type="number" step="0.05" [(ngModel)]="row.inputs.maturity"></td>
+          <td><input type="number" step="0.005" [(ngModel)]="row.inputs.domesticRate"></td>
+          <td><input type="number" step="0.005" [(ngModel)]="row.inputs.foreignRate"></td>
+          <td><input type="number" step="0.005" [(ngModel)]="row.inputs.vol"></td>
+          <td><input type="number" step="10000" [(ngModel)]="row.inputs.notional"></td>
+          <td class="mono premium">{{ aggregate.positions[i].premium | number: '1.0-0' }}</td>
+          <td><button type="button" class="remove" (click)="removePosition(i)" [disabled]="positions.length === 1">✕</button></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button type="button" class="add" (click)="addPosition()">+ Add position</button>
+
+    <div class="agg-stats">
+      <div><div class="num">{{ aggregate.totalPremium | number: '1.0-0' }}</div><div class="lbl">TOTAL PREMIUM (USD)</div></div>
+      <div><div class="num">{{ aggregate.netDelta | number: '1.0-0' }}</div><div class="lbl">NET DELTA (USD)</div></div>
+      <div><div class="num">{{ aggregate.netVega | number: '1.0-0' }}</div><div class="lbl">NET VEGA (USD / vol pt)</div></div>
+    </div>
+  </div>
+</app-project-demo-shell>

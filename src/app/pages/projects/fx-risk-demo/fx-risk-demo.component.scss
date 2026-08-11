@@ -1,0 +1,71 @@
+@use '../../../core/styles/tokens' as t;
+
+.book {
+  border: 1px solid t.$ink;
+  background: t.$panel;
+  padding: 22px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  @include t.mono(11.5px);
+
+  th {
+    text-align: left;
+    color: t.$ink-soft;
+    font-weight: 500;
+    padding: 0 6px 8px;
+    border-bottom: 1px solid t.$ink;
+  }
+
+  td {
+    padding: 4px 6px;
+    border-bottom: 1px solid t.$rule;
+  }
+
+  input, select {
+    width: 100%;
+    @include t.mono(11.5px);
+    padding: 5px 6px;
+    background: t.$paper;
+    border: 1px solid t.$rule;
+    color: t.$ink;
+  }
+
+  input.mono { width: 90px; }
+
+  .premium { color: t.$ink-soft; text-align: right; }
+
+  .remove {
+    background: none;
+    border: 1px solid t.$rule;
+    color: t.$ink-soft;
+    cursor: pointer;
+    padding: 3px 8px;
+    &:hover:not(:disabled) { border-color: t.$loss; color: t.$loss; }
+    &:disabled { opacity: 0.3; cursor: default; }
+  }
+}
+
+.add {
+  @include t.mono(12px);
+  margin-top: 14px;
+  padding: 7px 14px;
+  background: none;
+  border: 1px solid t.$ink;
+  cursor: pointer;
+  &:hover { background: t.$ink; color: t.$paper; }
+}
+
+.agg-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid t.$rule;
+
+  .num { @include t.mono(1.2rem); font-weight: 600; }
+  .lbl { @include t.mono(10.5px); color: t.$ink-soft; }
+}
