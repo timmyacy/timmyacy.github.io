@@ -1,0 +1,104 @@
+<app-project-demo-shell
+  title="MLMC-Pricer"
+  tagline="Multilevel Monte Carlo (Giles, 2008) for GBM-discretized options. Fine and coarse paths at each level share the same underlying Brownian path, so the difference between them shrinks fast as you go deeper. That's what lets MLMC match standard Monte Carlo's accuracy for a fraction of the cost. Try switching the scheme below: the variance-per-level chart should drop noticeably faster for Milstein or SRK than for Euler, since they're higher order."
+  [repoUrl]="repoUrl"
+  replayNote="The Euler, Milstein and SRK schemes and the European payoff are ported from the MLMC notebook in my MSc thesis (Python/Jupyter). The Asian payoff option is my own extension of the same estimator to a path-dependent case, it's not in the original notebook."
+>
+  <div class="calc">
+    <div class="calc-form">
+      <label>Option type</label>
+      <select [(ngModel)]="optionKind">
+        <option value="european">European</option>
+        <option value="asian">Asian (arithmetic average)</option>
+      </select>
+
+      <label>Call / Put</label>
+      <select [(ngModel)]="type">
+        <option value="call">Call</option>
+        <option value="put">Put</option>
+      </select>
+
+      <label>Discretization scheme</label>
+      <select [(ngModel)]="scheme">
+        <option value="euler">Euler-Maruyama (strong order 0.5)</option>
+        <option value="milstein">Milstein (strong order 1)</option>
+        <option value="srk">SRK / derivative-free Milstein (strong order 1)</option>
+      </select>
+
+      <label>Spot</label>
+      <input type="number" [(ngModel)]="spot" step="1">
+
+      <label>Strike</label>
+      <input type="number" [(ngModel)]="strike" step="1">
+
+      <label>Maturity (years)</label>
+      <input type="number" [(ngModel)]="maturity" step="0.1">
+
+      <label>Rate (%)</label>
+      <input type="number" [(ngModel)]="ratePct" step="0.5">
+
+      <label>Volatility (%)</label>
+      <input type="number" [(ngModel)]="volPct" step="1">
+
+      <label>Levels (0..L, steps double each level)</label>
+      <input type="number" [(ngModel)]="levels" step="1" max="10">
+
+      <label>Base paths (level 0)</label>
+      <input type="number" [(ngModel)]="basePaths" step="500" max="20000">
+
+      <button type="button" (click)="run()" [disabled]="running">{{ running ? 'Running…' : 'Run MLMC' }}</button>
+    </div>
+
+    <div class="calc-result" *ngIf="result as r">
+      <div class="price-row">
+        <div class="price-block">
+          <div class="lbl">MLMC PRICE</div>
+          <div class="price">{{ r.price | number: '1.4-4' }}</div>
+          <div class="ci mono">SE {{ r.stdError | number: '1.5-5' }}</div>
+        </div>
+        <div class="price-block secondary" *ngIf="hasExactReference">
+          <div class="lbl">EXACT (BLACK-SCHOLES)</div>
+          <div class="price small">{{ r.exact | number: '1.4-4' }}</div>
+          <div class="ci mono">error {{ (r.price - r.exact) | number: '1.5-5' }}</div>
+        </div>
+        <div class="price-block secondary" *ngIf="!hasExactReference">
+          <div class="lbl">EXACT REFERENCE</div>
+          <div class="price small">n/a</div>
+          <div class="ci mono">no closed form for arithmetic-average Asian options</div>
+        </div>
+        <div class="price-block secondary">
+          <div class="lbl">NAIVE MC (FINEST GRID)</div>
+          <div class="price small">{{ r.naiveMc.price | number: '1.4-4' }}</div>
+          <div class="ci mono">SE {{ r.naiveMc.stdError | number: '1.5-5' }}</div>
+        </div>
+      </div>
+
+      <div class="cost-note mono">
+        MLMC cost: {{ r.mlmcCost | number: '1.0-0' }} path-steps &middot;
+        naive MC cost at the same finest grid: {{ r.naiveMc.cost | number: '1.0-0' }} path-steps &middot;
+        <span class="ratio">{{ costRatio | number: '1.1-1' }}&times; cheaper</span>
+      </div>
+
+      <div class="chart-block">
+        <div class="lbl">log&#8322; VARIANCE PER LEVEL (the steady drop is why MLMC needs far fewer paths at deep levels)</div>
+        <canvas #varChart></canvas>
+      </div>
+
+      <table class="level-table">
+        <thead>
+          <tr><th>Level</th><th>Steps</th><th>Paths</th><th>Mean Y<sub>l</sub></th><th>Var Y<sub>l</sub></th><th>Cost</th></tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let lvl of r.levels">
+            <td>{{ lvl.level }}</td>
+            <td>{{ lvl.steps }}</td>
+            <td>{{ lvl.paths }}</td>
+            <td>{{ lvl.meanY | number: '1.4-4' }}</td>
+            <td>{{ lvl.varY | number: '1.6-6' }}</td>
+            <td>{{ lvl.cost | number: '1.0-0' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</app-project-demo-shell>
