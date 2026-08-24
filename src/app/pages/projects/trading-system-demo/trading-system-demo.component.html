@@ -1,0 +1,57 @@
+<app-project-demo-shell
+  title="Trading-System"
+  tagline="FIX order parsing, a UDP market data feed, a price-time priority order book, and a position manager, all running live against exchange connections in the real C++ system. Exposing that live to a browser isn't safe or practical, so this is a recorded session replayed tick by tick instead."
+  [repoUrl]="repoUrl"
+  replayNote="This is a recorded replay using synthetic data, not a live market connection."
+>
+  <div class="term">
+    <div class="term-controls">
+      <button type="button" (click)="toggle()">
+        {{ finished ? 'Restart' : (playing ? 'Pause' : 'Resume') }}
+      </button>
+      <span class="mono tick-count">tick {{ index + 1 }} / {{ session.length }}</span>
+    </div>
+
+    <div class="term-grid">
+      <div class="book">
+        <div class="book-head">ORDER BOOK</div>
+        <div class="ladder">
+          <div class="side asks">
+            <div class="row head"><span>SIZE</span><span>PRICE</span></div>
+            <div class="row" *ngFor="let lvl of reversedAsks">
+              <span>{{ lvl.size }}</span><span class="px ask">{{ lvl.price | number: '1.2-2' }}</span>
+            </div>
+          </div>
+          <div class="mid mono">{{ current.mid | number: '1.2-2' }}</div>
+          <div class="side bids">
+            <div class="row head"><span>PRICE</span><span>SIZE</span></div>
+            <div class="row" *ngFor="let lvl of current.bids">
+              <span class="px bid">{{ lvl.price | number: '1.2-2' }}</span><span>{{ lvl.size }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tape-block">
+        <div class="book-head">TRADE TAPE</div>
+        <div class="tape">
+          <div class="trade" *ngFor="let t of tape" [class.buy]="t.side === 'buy'" [class.sell]="t.side === 'sell'">
+            <span class="side-tag">{{ t.side === 'buy' ? 'BUY' : 'SELL' }}</span>
+            <span class="mono">{{ t.size }} &#64; {{ t.price | number: '1.2-2' }}</span>
+          </div>
+          <div class="tape-empty" *ngIf="tape.length === 0">no prints yet…</div>
+        </div>
+      </div>
+
+      <div class="pnl-block">
+        <div class="book-head">
+          POSITION P&amp;L
+          <span class="pnl-value mono" [class.up]="current.pnl >= 0" [class.down]="current.pnl < 0">
+            {{ current.pnl >= 0 ? '+' : '' }}{{ current.pnl | number: '1.2-2' }}
+          </span>
+        </div>
+        <canvas #pnlChart></canvas>
+      </div>
+    </div>
+  </div>
+</app-project-demo-shell>

@@ -1,0 +1,100 @@
+@use '../../../core/styles/tokens' as t;
+
+.term {
+  background: t.$panel-dark;
+  color: t.$paper;
+  padding: 22px 24px 26px;
+}
+
+.term-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+
+  button {
+    @include t.mono(12px);
+    background: t.$paper;
+    color: t.$ink;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+
+  .tick-count { color: #8A8E96; font-size: 11.5px; }
+}
+
+.term-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.2fr;
+  gap: 24px;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.book-head {
+  @include t.mono(11px);
+  color: #8A8E96;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.ladder {
+  @include t.mono(12px);
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 0;
+
+    &.head { color: #6E727A; font-size: 10.5px; }
+  }
+
+  .px.ask { color: #E0A08C; }
+  .px.bid { color: #8FD1A8; }
+
+  .mid {
+    text-align: center;
+    padding: 6px 0;
+    margin: 4px 0;
+    border-top: 1px dashed rgba(255,255,255,0.15);
+    border-bottom: 1px dashed rgba(255,255,255,0.15);
+    color: t.$paper;
+    font-weight: 600;
+  }
+}
+
+.tape {
+  @include t.mono(12px);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  .trade {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    .side-tag {
+      font-size: 10px;
+      padding: 1px 6px;
+      border: 1px solid currentColor;
+    }
+    &.buy { color: #8FD1A8; }
+    &.sell { color: #E0A08C; }
+  }
+
+  .tape-empty { color: #6E727A; font-size: 11.5px; }
+}
+
+.pnl-block {
+  .pnl-value {
+    font-size: 12px;
+    &.up { color: #8FD1A8; }
+    &.down { color: #E0A08C; }
+  }
+  canvas { width: 100%; height: 160px; display: block; }
+}
