@@ -1,0 +1,60 @@
+@use '../../core/styles/tokens' as t;
+
+.section-label { @include t.section-label; }
+
+.tool-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: t.$rule;
+  border: 1px solid t.$rule;
+  margin-bottom: 10px;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tool-card {
+  background: t.$paper;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.tool-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 10px;
+
+  h3 { margin: 0; font-size: 1.15rem; font-weight: 600; }
+  .lang { @include t.mono(11px); color: t.$ink-soft; }
+}
+
+.tool-card p { margin: 0 0 16px; font-size: .95rem; line-height: 1.55; flex-grow: 1; }
+
+.tool-stat {
+  @include t.mono(11.5px);
+  color: t.$gain;
+  border-top: 1px solid t.$rule;
+  padding-top: 12px;
+  margin-bottom: 14px;
+}
+
+.tool-actions {
+  display: flex;
+  gap: 10px;
+
+  a {
+    @include t.mono(12px);
+    text-decoration: none;
+    padding: 8px 14px;
+    border: 1px solid t.$ink;
+
+    &.primary:hover { background: t.$ink; color: t.$paper; }
+    &.secondary { border-color: t.$rule; color: t.$ink-soft; }
+    &.secondary:hover { border-color: t.$ink; color: t.$ink; }
+  }
+}

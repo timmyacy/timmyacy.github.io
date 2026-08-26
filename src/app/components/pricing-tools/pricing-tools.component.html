@@ -1,0 +1,19 @@
+<div id="tools" class="section-label">
+  <span>PRICING TOOLS</span>
+  <span>source available · built from scratch</span>
+</div>
+
+<div class="tool-grid">
+  <div class="tool-card" *ngFor="let tool of tools">
+    <div class="tool-top">
+      <h3>{{ tool.name }}</h3>
+      <span class="lang">{{ tool.lang }}</span>
+    </div>
+    <p>{{ tool.description }}</p>
+    <div class="tool-stat">{{ tool.stat }}</div>
+    <div class="tool-actions">
+      <a class="primary" [routerLink]="tool.demoRoute">Live demo →</a>
+      <a class="secondary" [href]="tool.repoUrl" target="_blank" rel="noopener">View repo ↗</a>
+    </div>
+  </div>
+</div>
