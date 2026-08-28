@@ -1,0 +1,10 @@
+<a class="back" routerLink="/" fragment="tools">&larr; back to pricing tools</a>
+
+<div class="demo-head">
+  <h1>{{ title }}</h1>
+  <p>{{ tagline }}</p>
+  <div class="demo-note" *ngIf="replayNote">{{ replayNote }}</div>
+  <a class="repo" [href]="repoUrl" target="_blank" rel="noopener">View source on GitHub &rarr;</a>
+</div>
+
+<ng-content></ng-content>

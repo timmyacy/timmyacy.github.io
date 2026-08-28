@@ -1,0 +1,54 @@
+@use '../../core/styles/tokens' as t;
+
+:host {
+  display: block;
+  padding: 36px 0 60px;
+}
+
+.back {
+  @include t.mono(12px);
+  color: t.$ink-soft;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 24px;
+
+  &:hover { color: t.$ink; }
+}
+
+.demo-head {
+  border-bottom: 1px solid t.$rule;
+  padding-bottom: 24px;
+  margin-bottom: 30px;
+
+  h1 {
+    font-size: 1.9rem;
+    font-weight: 600;
+    margin: 0 0 10px;
+    letter-spacing: -0.01em;
+  }
+
+  p {
+    font-size: 1rem;
+    color: t.$ink-soft;
+    max-width: 620px;
+    line-height: 1.6;
+    margin: 0 0 14px;
+  }
+
+  .demo-note {
+    @include t.mono(11.5px);
+    color: t.$ink-soft;
+    background: t.$panel;
+    display: inline-block;
+    padding: 6px 10px;
+    margin-bottom: 14px;
+  }
+
+  .repo {
+    @include t.mono(12px);
+    text-decoration: none;
+    color: t.$ink;
+    border-bottom: 1px solid t.$ink;
+    padding-bottom: 1px;
+  }
+}
