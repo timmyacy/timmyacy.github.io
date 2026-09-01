@@ -1,0 +1,51 @@
+@use '../../core/styles/tokens' as t;
+
+.section-label { @include t.section-label; }
+
+.api-endpoints {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: t.$rule;
+  border: 1px solid t.$rule;
+  margin-bottom: 50px;
+}
+
+.endpoint {
+  background: t.$panel-dark;
+  color: t.$paper;
+  padding: 20px 22px;
+}
+
+.endpoint-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 6px;
+
+  .verb {
+    @include t.mono(11px);
+    color: #8FD1A8;
+    border: 1px solid #8FD1A8;
+    padding: 1px 6px;
+  }
+  .path { @include t.mono(13.5px); font-weight: 600; }
+}
+
+.endpoint-desc {
+  font-family: t.$font-serif;
+  font-size: .92rem;
+  color: #C9C5BC;
+  margin-bottom: 14px;
+  max-width: 520px;
+}
+
+.endpoint pre {
+  @include t.mono(12px);
+  line-height: 1.7;
+  margin: 0;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 14px 16px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}

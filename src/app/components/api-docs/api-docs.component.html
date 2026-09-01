@@ -1,0 +1,15 @@
+<div id="api" class="section-label">
+  <span>API ACCESS</span>
+  <span>one free key, no credit card</span>
+</div>
+
+<div class="api-endpoints">
+  <div class="endpoint" *ngFor="let e of endpoints">
+    <div class="endpoint-head">
+      <span class="verb">{{ e.verb }}</span>
+      <span class="path">{{ e.path }}</span>
+    </div>
+    <div class="endpoint-desc">{{ e.description }}</div>
+    <pre>{{ e.example }}</pre>
+  </div>
+</div>
