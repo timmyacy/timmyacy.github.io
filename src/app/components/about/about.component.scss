@@ -1,0 +1,39 @@
+@use '../../core/styles/tokens' as t;
+
+.about-block {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 36px;
+  padding: 34px 0 10px;
+  border-bottom: 1px solid t.$rule;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+
+  p { margin: 0 0 14px; font-size: .98rem; line-height: 1.65; max-width: 520px; }
+}
+
+.about-facts {
+  @include t.mono(12px);
+  line-height: 2.1;
+  color: t.$ink-soft;
+  b { color: t.$ink; font-weight: 600; }
+}
+
+.about-links {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+
+  a {
+    @include t.mono(12px);
+    text-decoration: none;
+    padding: 8px 14px;
+    border: 1px solid t.$ink;
+
+    &.primary { background: t.$ink; color: t.$paper; }
+    &.secondary:hover { background: t.$ink; color: t.$paper; }
+  }
+}

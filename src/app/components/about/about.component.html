@@ -1,0 +1,20 @@
+<div id="about" class="about-block">
+  <div>
+    <p>
+      MSc Mathematical Finance (Distinction), University of York. About 4 years
+      at SAA Consultants building financial data pipelines, mostly ISO 20022
+      and SWIFT message validation. Now building pricing and risk
+      infrastructure from scratch and looking for quant developer, quant
+      analyst, or model validation roles in London.
+    </p>
+    <div class="about-links">
+      <a class="primary" href="#">Download CV (PDF)</a>
+      <a class="secondary" [href]="githubProfileUrl" target="_blank" rel="noopener">GitHub</a>
+      <a class="secondary" href="#">LinkedIn</a>
+      <a class="secondary" href="#api">/v1/profile →</a>
+    </div>
+  </div>
+  <div class="about-facts">
+    <div *ngFor="let f of facts"><b>{{ f.label }}</b> {{ f.value }}</div>
+  </div>
+</div>
