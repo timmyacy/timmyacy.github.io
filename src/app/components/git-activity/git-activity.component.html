@@ -1,0 +1,30 @@
+<div id="activity" class="section-label">
+  <span>LIVE BUILD LOG</span>
+  <span>
+    pulled from
+    <a class="ghlink" [href]="githubProfileUrl" target="_blank" rel="noopener">github.com/{{ githubUsername }}</a>
+  </span>
+</div>
+
+<div class="terminal">
+  <div class="terminal-bar">
+    <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+    <span class="terminal-title">git log --author={{ githubUsername }} --all --oneline</span>
+  </div>
+
+  <div class="terminal-body">
+    <div class="loading" *ngIf="loading">fetching latest activity from the GitHub API…</div>
+
+    <div class="notice" *ngIf="!loading && isFallback">
+      live feed isn't loading right now, probably a GitHub API rate limit or network hiccup. Showing recent highlights instead.
+    </div>
+
+    <div class="log-line" *ngFor="let item of items">
+      <span class="ts">{{ item.timestamp | date: 'yyyy-MM-dd HH:mm' }}</span>
+      <span class="tag" [class]="item.type">{{ typeLabel[item.type] }}</span>
+      <span class="repo">{{ item.repo }}</span>
+      <a class="msg" [href]="item.url" target="_blank" rel="noopener">{{ item.message }}</a>
+      <span class="sha" *ngIf="item.sha">{{ item.sha }}</span>
+    </div>
+  </div>
+</div>
