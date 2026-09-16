@@ -3,5 +3,5 @@
   <div class="navlinks">
     <a *ngFor="let link of links" routerLink="/" [fragment]="link.fragment">{{ link.label }}</a>
   </div>
-  <a class="navcta" href="#">Download CV</a>
+  <a class="navcta" href="/cv.pdf" target="_blank">Download CV</a>
 </nav>

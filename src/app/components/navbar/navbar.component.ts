@@ -12,8 +12,8 @@ import { RouterLink } from '@angular/router';
 export class NavbarComponent {
   readonly links = [
     { label: 'About', fragment: 'about' },
-    { label: 'Live Markets', fragment: 'markets' },
     { label: 'Pricing Tools', fragment: 'tools' },
+    { label: 'Engine Check', fragment: 'markets' },
     { label: 'Build Log', fragment: 'activity' },
     { label: 'Datasets', fragment: 'data' },
     { label: 'API', fragment: 'api' },

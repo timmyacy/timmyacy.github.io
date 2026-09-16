@@ -1,7 +1,7 @@
 @use '../../core/styles/tokens' as t;
 
 .hero {
-  padding: 46px 0 20px;
+  padding: 46px 0 30px;
   border-bottom: 1px solid t.$rule;
 
   h1 {
@@ -17,33 +17,6 @@
     color: t.$ink-soft;
     max-width: 560px;
     line-height: 1.6;
-    margin: 0 0 30px;
+    margin: 0;
   }
-}
-
-.ticker-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 1px;
-  background: t.$rule;
-  border: 1px solid t.$rule;
-  margin-bottom: 40px;
-
-  @media (max-width: 900px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-.tick-cell {
-  background: t.$paper;
-  padding: 14px 14px 10px;
-
-  .sym  { @include t.mono(11.5px); color: t.$ink-soft; }
-  .px   { @include t.mono(1.05rem); font-weight: 600; margin: 2px 0; }
-  .chg  {
-    @include t.mono(11px);
-    &.up   { color: t.$gain; }
-    &.down { color: t.$loss; }
-  }
-  canvas { width: 100%; height: 28px; display: block; margin-top: 4px; }
 }

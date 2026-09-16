@@ -1,0 +1,39 @@
+<div id="markets" class="section-label">
+  <span>LIVE ENGINE CHECK</span>
+  <span>computed live in your browser, not cached</span>
+</div>
+
+<p class="intro">
+  This is a live demo of the pricing engines above, actually working. A live
+  BTC and ETH spot price is pulled from CoinGecko, then priced through the
+  Black-Scholes, Monte Carlo and Merton jump-diffusion models below, right in
+  your browser. Three different pricing methods, same inputs, so if the
+  numbers land close together, that's a live check that they agree with
+  each other.
+</p>
+
+<div class="proof-panel">
+  <div class="proof-status mono">
+    <span *ngIf="loading">fetching live spot prices…</span>
+    <span *ngIf="!loading && isFallback">live feed unavailable right now, showing last-known prices</span>
+  </div>
+
+  <div class="proof-grid">
+    <div class="proof-card" *ngFor="let p of proofs">
+      <div class="proof-title">{{ p.symbol }} {{ maturityDays }}d ATM call</div>
+      <div class="proof-spot mono">spot {{ p.spot | currency: 'USD':'symbol':'1.0-0' }}</div>
+
+      <div class="proof-row">
+        <div><span class="lbl">BSM</span><span class="val">{{ p.bsm | currency: 'USD':'symbol':'1.2-2' }}</span></div>
+        <div><span class="lbl">MC</span><span class="val">{{ p.mc | currency: 'USD':'symbol':'1.2-2' }}</span></div>
+        <div><span class="lbl">Jump-Diff</span><span class="val">{{ p.merton | currency: 'USD':'symbol':'1.2-2' }}</span></div>
+      </div>
+
+      <div class="proof-agree">agree within {{ p.spreadPct | number: '1.2-2' }}%</div>
+    </div>
+  </div>
+
+  <div class="proof-note">
+    Vol and jump parameters are assumed rather than pulled from live options data, which isn't available for free without an API key. Everything else here, the spot price and all three prices, is computed live on page load.
+  </div>
+</div>
