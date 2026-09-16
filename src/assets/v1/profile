@@ -1,0 +1,74 @@
+{
+  "name": "Oluwatimilehin Ajibode",
+  "preferred_name": "Timmy",
+  "summary": "Software engineer with four years of production experience building financial data pipelines and risk systems, and a recent MSc in Mathematical Finance with Distinction from the University of York. Focused on quantitative development at the intersection of low-latency engineering and derivatives pricing.",
+  "education": [
+    {
+      "degree": "MSc Mathematical Finance (Distinction)",
+      "school": "University of York",
+      "dates": "Sept 2024 - Sept 2025",
+      "thesis": "Multi-Level Monte Carlo methods for options pricing (84%)"
+    },
+    {
+      "degree": "BSc Computer Science with Professional Placement",
+      "school": "Plymouth University",
+      "dates": "Aug 2015 - Dec 2020"
+    }
+  ],
+  "experience": [
+    {
+      "employer": "SAA Consultants",
+      "title": "Financial Software Engineer",
+      "location": "Plymouth, UK",
+      "dates": "Sept 2020 - Aug 2024",
+      "highlights": [
+        "Built a C++/Java framework validating millions of ISO 20022 and SWIFT financial messages daily across BACS, HMRC RTI/PAYE, and settlement pipelines",
+        "Engineered multi-threaded Java pipelines for real-time BACS payment and payroll transaction processing",
+        "Designed RESTful APIs (OpenAPI) giving risk analysts programmatic access to validated trade data and business rule logic",
+        "Led migration of build and deployment pipelines from SVN to Jenkins, containerising 7-8 microservices on Kubernetes"
+      ]
+    },
+    {
+      "employer": "Royal Cornwall Hospitals NHS Trust",
+      "title": "Honorary Research Assistant",
+      "location": "Truro, UK",
+      "dates": "Jun 2020 - Aug 2020",
+      "highlights": [
+        "Technical requirements analysis and system architecture for a clinical homecare platform, including NHS Spine/MPI integration and role-based access control"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "C++ Algorithmic Trading System",
+      "description": "FIX session parsing, L2 order book, UDP market data feed, position manager, volatility surface pricer, live risk reporting.",
+      "demo": "https://timmyacy.github.io/#/projects/trading-system"
+    },
+    {
+      "name": "C++ Levy Pricer",
+      "description": "FFT-based option pricing implementing Carr-Madan with a from-scratch Cooley-Tukey FFT. Merton jump-diffusion verified across semi-analytic, FFT and Monte Carlo methods.",
+      "demo": "https://timmyacy.github.io/#/projects/jump-diffusion-pricer"
+    },
+    {
+      "name": "FX Options Portfolio Risk Aggregator",
+      "description": "Multi-currency FX options portfolio pricing via Garman-Kohlhagen, with Pydantic validation and unit tests covering put-call parity and edge cases.",
+      "demo": "https://timmyacy.github.io/#/projects/fx-risk-aggregator"
+    }
+  ],
+  "skills": {
+    "languages": ["C++", "Python", "Java", "SQL", "TypeScript"],
+    "quant_libraries": ["Pandas", "NumPy", "SciPy", "Matplotlib", "QuantLib"],
+    "platforms": ["Kubernetes", "Docker", "Jenkins", "CI/CD", "Git", "PostgreSQL", "MongoDB"]
+  },
+  "certifications": ["CKAD (Linux Foundation, 2022)"],
+  "honors": [
+    "Ranked 1st in Department for Final Year Project, University of York (2025)",
+    "Best Final Year Project, Computing Showcase, University of Plymouth (2020)"
+  ],
+  "email": "timmy_ajibode@hotmail.com",
+  "github": "https://github.com/timmyacy",
+  "linkedin": "https://www.linkedin.com/in/oluwatimilehin-timmy-ajibode/",
+  "cv_txt": "https://timmyacy.github.io/cv.txt",
+  "cv_pdf": "https://timmyacy.github.io/cv.pdf",
+  "note": "This is a static file, not a live database query. It's accurate as of the last time the site was rebuilt."
+}

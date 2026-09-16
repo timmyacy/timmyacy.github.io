@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { GITHUB_PROFILE_URL } from '../../core/constants';
+import { GITHUB_PROFILE_URL, LINKEDIN_URL } from '../../core/constants';
 
 @Component({
   selector: 'app-footer',
@@ -9,4 +9,5 @@ import { GITHUB_PROFILE_URL } from '../../core/constants';
 })
 export class FooterComponent {
   readonly githubProfileUrl = GITHUB_PROFILE_URL;
+  readonly linkedinUrl = LINKEDIN_URL;
 }

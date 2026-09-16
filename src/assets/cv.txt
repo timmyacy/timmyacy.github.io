@@ -1,0 +1,116 @@
+OLUWATIMILEHIN AJIBODE
+(known as Timmy)
+
+Email:     timmy_ajibode@hotmail.com
+LinkedIn:  https://www.linkedin.com/in/oluwatimilehin-timmy-ajibode/
+GitHub:    https://github.com/timmyacy
+Site:      https://timmyacy.github.io/
+API:       curl https://timmyacy.github.io/v1/profile
+
+
+SUMMARY
+-------
+Software engineer with four years of production experience building
+financial data pipelines and risk systems, and a recent MSc in
+Mathematical Finance with Distinction from the University of York.
+Focused on quantitative development at the intersection of low-latency
+engineering and derivatives pricing, with active projects in C++
+covering FFT-based option pricing and Levy process models.
+
+
+EDUCATION
+---------
+University of York, United Kingdom                    Sept 2024 - Sept 2025
+  MSc Mathematical Finance (Distinction)
+  Thesis: Multi-Level Monte Carlo methods for options pricing (84%)
+
+Plymouth University, United Kingdom                     Aug 2015 - Dec 2020
+  BSc Computer Science with Professional Placement
+
+
+TECHNICAL SKILLS
+-----------------
+Languages:           C++, Python, Java, SQL, TypeScript
+Quant libraries:      Pandas, NumPy, SciPy, Matplotlib, QuantLib
+Platforms & tools:   Kubernetes (CKAD), Docker, Jenkins, CI/CD, Git,
+                     PostgreSQL, MongoDB
+Financial modelling: Stochastic calculus (Ito's lemma), Monte Carlo
+                     methods, numerical PDEs, derivatives pricing,
+                     risk-neutral valuation, Carr-Madan FFT
+
+
+EXPERIENCE
+----------
+SAA Consultants, Plymouth, United Kingdom               Sept 2020 - Aug 2024
+  Financial Software Engineer
+
+  - Quantitative Analytics & Validation Engine: built a C++/Java
+    framework validating millions of ISO 20022 and SWIFT financial
+    messages daily across BACS, HMRC RTI/PAYE, and settlement pipelines.
+    Identified a production bug where an optional field combination
+    caused inconsistent notional scaling, producing incorrect values in
+    downstream risk models.
+  - Low-Latency Data Processing Pipeline: engineered multi-threaded Java
+    pipelines for real-time BACS payment and payroll transaction
+    processing. Kubernetes containerisation of 7-8 REIMS microservices
+    reduced deployment overhead and improved throughput.
+  - Analytics API Development: designed RESTful APIs (OpenAPI) giving
+    risk analysts programmatic access to validated trade data and
+    business rule logic, reducing manual reconciliation overhead across
+    downstream systems.
+  - CI/CD Migration & Tooling: led migration of build and deployment
+    pipelines from SVN to Jenkins with Git version control, containerising
+    7-8 REIMS microservices on Kubernetes and onboarding the team onto
+    the new workflow.
+
+Royal Cornwall Hospitals NHS Trust, Truro, United Kingdom  Jun 2020 - Aug 2020
+  Honorary Research Assistant
+
+  - Homecare System Redesign: technical requirements analysis and system
+    architecture for a clinical homecare platform, covering NHS
+    Spine/MPI integration, role-based access control, data validation
+    for prescription and funding pipelines, and Blueteq API integration.
+
+
+QUANTITATIVE MODELLING & SYSTEMS PROJECTS
+-------------------------------------------
+C++ Algorithmic Trading System
+  End-to-end trading system covering FIX session message parsing, an
+  L2 order book, a UDP market data feed, a position manager, a
+  volatility surface pricer, and live risk reporting. Low-latency
+  design with clean separation between market data ingestion and risk
+  layers.
+  Live demo: https://timmyacy.github.io/#/projects/trading-system
+
+C++ Levy Pricer
+  FFT-based option pricing library implementing Carr-Madan with a
+  from-scratch Cooley-Tukey FFT. Merton jump-diffusion verified by
+  triple agreement across semi-analytic, FFT, and Monte Carlo methods.
+  Variance Gamma in progress.
+  Live demo: https://timmyacy.github.io/#/projects/jump-diffusion-pricer
+
+FX Options Portfolio Risk Aggregator
+  Python tool pricing a multi-currency FX options portfolio via
+  Garman-Kohlhagen, computing PV, Delta, and Vega with Pydantic
+  validation and 10 unit tests covering put-call parity, edge cases,
+  and notional conversion.
+  Live demo: https://timmyacy.github.io/#/projects/fx-risk-aggregator
+
+Also on the site: a from-scratch Black-Scholes pricer, a five-payoff-type
+Monte Carlo engine (European, Binary, Asian, Barrier, Lookback), and a
+browser port of the Multi-Level Monte Carlo estimator from the MSc
+thesis above, all with live, runnable demos at https://timmyacy.github.io/
+
+
+HONOURS AND AWARDS
+-------------------
+- Ranked 1st in Department for Final Year Project, University of York, 2025
+- Certified Kubernetes Application Developer (CKAD), Linux Foundation, 2022
+- Best Final Year Project, Computing Showcase, University of Plymouth, 2020
+
+
+NOTES
+-----
+This file is served as a static asset, not generated per request. If
+you're reading this via curl: thanks for checking, that means the trick
+worked.
