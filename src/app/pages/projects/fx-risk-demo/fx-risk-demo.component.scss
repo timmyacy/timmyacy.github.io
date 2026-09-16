@@ -58,6 +58,13 @@ table {
   &:hover { background: t.$ink; color: t.$paper; }
 }
 
+.fx-note {
+  font-size: 10.5px;
+  color: t.$ink-soft;
+  margin-top: 14px;
+  line-height: 1.5;
+}
+
 .agg-stats {
   display: flex;
   flex-wrap: wrap;

@@ -13,7 +13,11 @@
       </thead>
       <tbody>
         <tr *ngFor="let row of positions; let i = index; let last = last">
-          <td><input class="mono" [(ngModel)]="row.pair"></td>
+          <td>
+            <select class="mono" [(ngModel)]="row.pair" (ngModelChange)="onPairChange(row)">
+              <option *ngFor="let pair of fxPairs" [value]="pair">{{ pair }}</option>
+            </select>
+          </td>
           <td>
             <select [(ngModel)]="row.inputs.type">
               <option value="call">Call</option>
@@ -34,6 +38,10 @@
     </table>
 
     <button type="button" class="add" (click)="addPosition()">+ Add position</button>
+
+    <div class="fx-note mono">
+      Spot and base rates are standard reference levels for testing, not a live feed. Every field is editable, so try arbitrary values too.
+    </div>
 
     <div class="agg-stats">
       <div><div class="num">{{ aggregate.totalPremium | number: '1.0-0' }}</div><div class="lbl">TOTAL PREMIUM (USD)</div></div>

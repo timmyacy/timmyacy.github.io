@@ -2,12 +2,41 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProjectDemoShellComponent } from '../../../components/project-demo-shell/project-demo-shell.component';
-import { githubRepoUrl } from '../../../core/constants';
+import { GITHUB_PROFILE_URL } from '../../../core/constants';
 import { aggregateFxRisk, FxOptionInputs } from '../../../core/engines/garman-kohlhagen';
 
 interface PositionRow {
   pair: string;
   inputs: FxOptionInputs;
+}
+
+interface FxPreset {
+  spot: number;
+  domesticRate: number;
+  foreignRate: number;
+  vol: number;
+}
+
+// Standard reference levels for testing the aggregator, not a live feed.
+// (FX quotes aren't freely fetchable without an API key, unlike the crypto
+// prices used in the Live Engine Check section below.) Domestic = USD.
+const FX_PRESETS: Record<string, FxPreset> = {
+  'GBP/USD': { spot: 1.34, domesticRate: 0.045, foreignRate: 0.05, vol: 0.09 },
+  'EUR/USD': { spot: 1.09, domesticRate: 0.045, foreignRate: 0.03, vol: 0.085 },
+  'USD/JPY': { spot: 155.2, domesticRate: 0.045, foreignRate: 0.001, vol: 0.11 },
+  'AUD/USD': { spot: 0.66, domesticRate: 0.045, foreignRate: 0.043, vol: 0.1 },
+  'USD/CHF': { spot: 0.88, domesticRate: 0.045, foreignRate: 0.011, vol: 0.08 },
+  'USD/CAD': { spot: 1.37, domesticRate: 0.045, foreignRate: 0.03, vol: 0.075 },
+};
+
+const FX_PAIRS = Object.keys(FX_PRESETS);
+
+function buildPosition(pair: string, type: 'call' | 'put', notional: number): PositionRow {
+  const preset = FX_PRESETS[pair];
+  return {
+    pair,
+    inputs: { spot: preset.spot, strike: preset.spot, maturity: 0.25, domesticRate: preset.domesticRate, foreignRate: preset.foreignRate, vol: preset.vol, type, notional },
+  };
 }
 
 @Component({
@@ -18,32 +47,27 @@ interface PositionRow {
   styleUrl: './fx-risk-demo.component.scss',
 })
 export class FxRiskDemoComponent {
-  readonly repoUrl = githubRepoUrl('fx-risk-aggregator');
+  readonly repoUrl = `${GITHUB_PROFILE_URL}/Risk-Aggregrator`;
+  readonly fxPairs = FX_PAIRS;
 
   positions: PositionRow[] = [
-    {
-      pair: 'GBP/USD',
-      inputs: { spot: 1.34, strike: 1.36, maturity: 0.25, domesticRate: 0.045, foreignRate: 0.05, vol: 0.09, type: 'call', notional: 1_000_000 },
-    },
-    {
-      pair: 'EUR/USD',
-      inputs: { spot: 1.09, strike: 1.07, maturity: 0.5, domesticRate: 0.045, foreignRate: 0.03, vol: 0.085, type: 'put', notional: 750_000 },
-    },
-    {
-      pair: 'USD/JPY',
-      inputs: { spot: 155.2, strike: 158, maturity: 0.17, domesticRate: 0.045, foreignRate: 0.001, vol: 0.11, type: 'call', notional: 500_000 },
-    },
+    buildPosition('GBP/USD', 'call', 1_000_000),
+    buildPosition('EUR/USD', 'put', 750_000),
+    buildPosition('USD/JPY', 'call', 500_000),
   ];
 
   get aggregate() {
     return aggregateFxRisk(this.positions);
   }
 
+  onPairChange(row: PositionRow): void {
+    const preset = FX_PRESETS[row.pair];
+    row.inputs = { ...row.inputs, spot: preset.spot, strike: preset.spot, domesticRate: preset.domesticRate, foreignRate: preset.foreignRate, vol: preset.vol };
+  }
+
   addPosition(): void {
-    this.positions.push({
-      pair: 'NEW/PAIR',
-      inputs: { spot: 1.0, strike: 1.0, maturity: 0.25, domesticRate: 0.04, foreignRate: 0.04, vol: 0.1, type: 'call', notional: 100_000 },
-    });
+    const unused = this.fxPairs.find((p) => !this.positions.some((row) => row.pair === p)) ?? this.fxPairs[0];
+    this.positions.push(buildPosition(unused, 'call', 100_000));
   }
 
   removePosition(i: number): void {

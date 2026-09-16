@@ -17,7 +17,12 @@
             "tsConfig": "tsconfig.app.json",
             "polyfills": ["zone.js"],
             "styles": ["src/styles.scss"],
-            "assets": []
+            "assets": [
+              { "glob": "favicon.svg", "input": "src", "output": "/" },
+              { "glob": "cv.txt", "input": "src/assets", "output": "/" },
+              { "glob": "cv.pdf", "input": "src/assets", "output": "/" },
+              { "glob": "profile", "input": "src/assets/v1", "output": "/v1" }
+            ]
           },
           "configurations": {
             "production": {
