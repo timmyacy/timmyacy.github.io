@@ -13,7 +13,7 @@ import { blackScholes, OptionType, putCallParityCheck } from '../../../core/engi
   styleUrl: './bsm-pricer-demo.component.scss',
 })
 export class BsmPricerDemoComponent {
-  readonly repoUrl = githubRepoUrl('bsm-pricer');
+  readonly repoUrl = githubRepoUrl('BSM-Pricer');
 
   spot = 100;
   strike = 105;

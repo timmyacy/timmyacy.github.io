@@ -14,7 +14,7 @@ import { mertonJumpDiffusion, MertonResult } from '../../../core/engines/merton-
   styleUrl: './jump-diffusion-demo.component.scss',
 })
 export class JumpDiffusionDemoComponent implements AfterViewInit, DoCheck {
-  readonly repoUrl = githubRepoUrl('jump-diffusion-pricer');
+  readonly repoUrl = githubRepoUrl('Jump_Diffusion_Pricer');
 
   spot = 100;
   strike = 105;
