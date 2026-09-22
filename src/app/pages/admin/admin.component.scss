@@ -161,9 +161,9 @@ button {
     h1, h2, h3 { font-family: inherit; margin: 0.6em 0 0.3em; }
     p { margin: 0 0 0.8em; line-height: 1.6; }
     img { max-width: 100%; }
-    code { @include t.mono(12px); background: t.$panel; padding: 1px 4px; }
-    pre { @include t.mono(12px); background: t.$panel; padding: 10px; overflow-x: auto; }
     a { color: t.$ink; }
+
+    @include t.notebook-cells;
   }
 
   .preview {

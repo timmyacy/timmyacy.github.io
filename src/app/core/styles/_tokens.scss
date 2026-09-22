@@ -25,3 +25,45 @@ $font-mono:  'IBM Plex Mono', monospace;
   justify-content: space-between;
   padding: 36px 0 16px;
 }
+
+// Rendered (not live) notebook-style code cell + output block, used on
+// both the blog editor preview and the public post page so what you
+// write matches what visitors see.
+@mixin notebook-cells {
+  .nb-cell {
+    margin: 0 0 4px;
+    background: $panel;
+    border: 1px solid $rule;
+    border-left: 3px solid $ink;
+
+    pre {
+      margin: 0;
+      padding: 12px 14px;
+      overflow-x: auto;
+    }
+
+    code.hljs {
+      @include mono(12.5px);
+      background: none;
+      color: $ink;
+    }
+  }
+
+  .nb-output {
+    @include mono(12.5px);
+    margin: 0 0 1em;
+    padding: 10px 14px;
+    background: $paper;
+    border: 1px solid $rule;
+    border-left: 3px solid $ink-soft;
+    color: $ink-soft;
+    white-space: pre-wrap;
+  }
+
+  .hljs-keyword, .hljs-built_in { color: #7B4B94; }
+  .hljs-string { color: $gain; }
+  .hljs-number, .hljs-literal { color: $loss; }
+  .hljs-comment { color: $ink-soft; font-style: italic; }
+  .hljs-title, .hljs-title.function_ { color: #1D6FA5; }
+  .hljs-params { color: $ink; }
+}

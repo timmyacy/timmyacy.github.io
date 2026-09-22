@@ -56,7 +56,7 @@
             <span class="mono small" *ngIf="uploading">uploading...</span>
           </div>
           <div class="write-preview">
-            <textarea #contentBox rows="30" [(ngModel)]="d.content" placeholder="Write in markdown, the preview updates as you type. Use the button above to drop a photo in wherever your cursor is."></textarea>
+            <textarea #contentBox rows="30" [(ngModel)]="d.content" placeholder="Write in markdown."></textarea>
             <div class="preview-pane" [innerHTML]="previewHtml"></div>
           </div>
 
