@@ -111,6 +111,33 @@ button {
 
   input[type="file"] { @include t.mono(11.5px); }
 
+  .write-preview {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+
+    @media (max-width: 800px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .preview-pane {
+    @include t.mono(13px);
+    padding: 8px 12px;
+    background: t.$paper;
+    border: 1px solid t.$rule;
+    overflow-y: auto;
+    max-height: 420px;
+    font-family: t.$font-serif;
+
+    h1, h2, h3 { font-family: inherit; margin: 0.6em 0 0.3em; }
+    p { margin: 0 0 0.8em; line-height: 1.6; }
+    img { max-width: 100%; }
+    code { @include t.mono(12px); background: t.$panel; padding: 1px 4px; }
+    pre { @include t.mono(12px); background: t.$panel; padding: 10px; overflow-x: auto; }
+    a { color: t.$ink; }
+  }
+
   .preview {
     max-width: 240px;
     max-height: 160px;

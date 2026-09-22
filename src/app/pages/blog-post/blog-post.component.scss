@@ -43,5 +43,12 @@ h1 {
 .content {
   font-size: 1.02rem;
   line-height: 1.7;
-  white-space: pre-wrap;
+
+  h1, h2, h3 { margin: 1.2em 0 0.4em; letter-spacing: -0.01em; }
+  p { margin: 0 0 1em; }
+  img { max-width: 100%; border: 1px solid t.$rule; }
+  code { @include t.mono(13px); background: t.$panel; padding: 1px 5px; }
+  pre { @include t.mono(13px); background: t.$panel; padding: 14px; overflow-x: auto; }
+  a { color: t.$ink; }
+  blockquote { margin: 0 0 1em; padding-left: 16px; border-left: 2px solid t.$rule; color: t.$ink-soft; }
 }

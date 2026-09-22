@@ -47,8 +47,11 @@
           <div class="mono small" *ngIf="uploading">uploading...</div>
           <img *ngIf="d.cover_image_url" [src]="d.cover_image_url" class="preview">
 
-          <label>Content</label>
-          <textarea rows="14" [(ngModel)]="d.content"></textarea>
+          <label>Content (markdown)</label>
+          <div class="write-preview">
+            <textarea rows="18" [(ngModel)]="d.content" placeholder="Write in markdown, the preview updates as you type."></textarea>
+            <div class="preview-pane" [innerHTML]="previewHtml"></div>
+          </div>
 
           <label class="checkbox-label">
             <input type="checkbox" [(ngModel)]="d.published"> Published (visible on the public blog)

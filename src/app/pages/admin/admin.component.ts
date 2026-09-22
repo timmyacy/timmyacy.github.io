@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { User } from '@supabase/supabase-js';
 import { Post, SupabaseService } from '../../core/services/supabase.service';
+import { renderMarkdown } from '../../core/utils/markdown';
 
 type Draft = Pick<Post, 'title' | 'slug' | 'content' | 'published' | 'cover_image_url'> & { id?: string };
 
@@ -97,6 +98,10 @@ export class AdminComponent implements OnInit {
 
   cancelEdit(): void {
     this.draft = null;
+  }
+
+  get previewHtml(): string {
+    return renderMarkdown(this.draft?.content ?? '');
   }
 
   onTitleChange(title: string): void {

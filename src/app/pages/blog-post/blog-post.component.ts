@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, ActivatedRoute } from '@angular/router';
 import { Post, SupabaseService } from '../../core/services/supabase.service';
+import { renderMarkdown } from '../../core/utils/markdown';
 
 @Component({
   selector: 'app-blog-post',
@@ -14,6 +15,7 @@ export class BlogPostComponent implements OnInit {
   post: Post | null = null;
   loading = true;
   notFound = false;
+  contentHtml = '';
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -27,6 +29,7 @@ export class BlogPostComponent implements OnInit {
         this.post = post;
         this.notFound = !post;
         this.loading = false;
+        if (post) this.contentHtml = renderMarkdown(post.content);
       },
       error: () => {
         this.notFound = true;
