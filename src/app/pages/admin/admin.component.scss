@@ -2,7 +2,7 @@
 
 .admin-page {
   padding: 36px 0 60px;
-  max-width: 720px;
+  max-width: 960px;
 }
 
 .back {
@@ -111,6 +111,34 @@ button {
 
   input[type="file"] { @include t.mono(11.5px); }
 
+  .content-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .file-btn {
+    @include t.mono(11.5px);
+    position: relative;
+    display: inline-block;
+    padding: 7px 12px;
+    background: t.$paper;
+    border: 1px solid t.$ink;
+    cursor: pointer;
+    margin: 0;
+
+    &:hover { background: t.$ink; color: t.$paper; }
+
+    input[type="file"] {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      overflow: hidden;
+    }
+  }
+
   .write-preview {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -127,7 +155,7 @@ button {
     background: t.$paper;
     border: 1px solid t.$rule;
     overflow-y: auto;
-    max-height: 420px;
+    max-height: 640px;
     font-family: t.$font-serif;
 
     h1, h2, h3 { font-family: inherit; margin: 0.6em 0 0.3em; }

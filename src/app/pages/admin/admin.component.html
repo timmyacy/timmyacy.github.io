@@ -48,8 +48,15 @@
           <img *ngIf="d.cover_image_url" [src]="d.cover_image_url" class="preview">
 
           <label>Content (markdown)</label>
+          <div class="content-toolbar">
+            <label class="file-btn">
+              + Insert image into content
+              <input type="file" accept="image/*" (change)="insertImageAtCursor($event)" [disabled]="uploading">
+            </label>
+            <span class="mono small" *ngIf="uploading">uploading...</span>
+          </div>
           <div class="write-preview">
-            <textarea rows="18" [(ngModel)]="d.content" placeholder="Write in markdown, the preview updates as you type."></textarea>
+            <textarea #contentBox rows="30" [(ngModel)]="d.content" placeholder="Write in markdown, the preview updates as you type. Use the button above to drop a photo in wherever your cursor is."></textarea>
             <div class="preview-pane" [innerHTML]="previewHtml"></div>
           </div>
 

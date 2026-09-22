@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -42,6 +42,8 @@ export class AdminComponent implements OnInit {
   saving = false;
   uploading = false;
   errorMessage = '';
+
+  @ViewChild('contentBox') contentBox?: ElementRef<HTMLTextAreaElement>;
 
   constructor(private readonly supabase: SupabaseService) {}
 
@@ -121,6 +123,49 @@ export class AdminComponent implements OnInit {
       next: (url) => {
         this.draft!.cover_image_url = url;
         this.uploading = false;
+      },
+      error: (e) => {
+        this.errorMessage = e.message;
+        this.uploading = false;
+      },
+    });
+  }
+
+  // Uploads a photo and drops it into the content at the cursor as markdown,
+  // so you can write paragraph -> image -> paragraph without leaving the
+  // textarea. Distinct from onFileSelected, which sets the single cover image.
+  insertImageAtCursor(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+    if (!file || !this.draft) return;
+    this.uploading = true;
+    this.supabase.uploadImage(file).subscribe({
+      next: (url) => {
+        this.uploading = false;
+        const markdownImage = `![](${url})`;
+        const textarea = this.contentBox?.nativeElement;
+        const content = this.draft!.content;
+
+        if (textarea) {
+          const start = textarea.selectionStart ?? content.length;
+          const end = textarea.selectionEnd ?? start;
+          const before = content.slice(0, start);
+          const after = content.slice(end);
+          const leadingBreak = before.length > 0 && !before.endsWith('\n\n') ? '\n\n' : '';
+          const trailingBreak = after.length > 0 && !after.startsWith('\n\n') ? '\n\n' : '';
+          const insertion = leadingBreak + markdownImage + trailingBreak;
+          this.draft!.content = before + insertion + after;
+
+          const newCursor = (before + insertion).length;
+          setTimeout(() => {
+            textarea.focus();
+            textarea.setSelectionRange(newCursor, newCursor);
+          });
+        } else {
+          this.draft!.content = content + (content ? '\n\n' : '') + markdownImage;
+        }
+
+        input.value = '';
       },
       error: (e) => {
         this.errorMessage = e.message;
