@@ -14,9 +14,29 @@ nav {
 
 .navbrand { font-weight: 600; font-size: 1.05rem; text-decoration: none; color: t.$ink; }
 
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+
+  span {
+    display: block;
+    height: 2px;
+    background: t.$ink;
+  }
+}
+
 .navlinks {
   @include t.mono(12.5px);
   display: flex;
+  align-items: center;
   gap: 22px;
 
   a {
@@ -32,4 +52,39 @@ nav {
   color: t.$paper;
   padding: 7px 14px;
   text-decoration: none;
+  border-bottom: none !important;
+}
+
+@media (max-width: 860px) {
+  .menu-toggle {
+    display: flex;
+  }
+
+  .navlinks {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    background: t.$paper;
+    border-bottom: 2px solid t.$ink;
+
+    &.open { display: flex; }
+
+    a {
+      width: 100%;
+      padding: 14px 28px;
+      border-bottom: 1px solid t.$rule;
+      &:hover { border-bottom: 1px solid t.$rule; background: t.$panel; }
+    }
+
+    .navcta {
+      margin: 14px 28px;
+      width: calc(100% - 56px);
+      text-align: center;
+    }
+  }
 }

@@ -10,12 +10,21 @@ import { RouterLink } from '@angular/router';
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
+  menuOpen = false;
+
+  toggleMenu(): void {
+    this.menuOpen = !this.menuOpen;
+  }
+
+  closeMenu(): void {
+    this.menuOpen = false;
+  }
+
   readonly links = [
     { label: 'About', fragment: 'about' },
     { label: 'Pricing Tools', fragment: 'tools' },
     { label: 'Engine Check', fragment: 'markets' },
     { label: 'Build Log', fragment: 'activity' },
-    { label: 'Datasets', fragment: 'data' },
     { label: 'API', fragment: 'api' },
   ];
 }

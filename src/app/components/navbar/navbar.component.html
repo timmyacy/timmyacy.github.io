@@ -1,8 +1,13 @@
 <nav>
-  <a class="navbrand" routerLink="/">Timmy Ajibode</a>
-  <div class="navlinks">
-    <a *ngFor="let link of links" routerLink="/" [fragment]="link.fragment">{{ link.label }}</a>
-    <a routerLink="/blog">Blog</a>
+  <a class="navbrand" routerLink="/" (click)="closeMenu()">Timmy Ajibode</a>
+
+  <button type="button" class="menu-toggle" (click)="toggleMenu()" [attr.aria-expanded]="menuOpen" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="navlinks" [class.open]="menuOpen">
+    <a *ngFor="let link of links" routerLink="/" [fragment]="link.fragment" (click)="closeMenu()">{{ link.label }}</a>
+    <a routerLink="/blog" (click)="closeMenu()">Blog</a>
+    <a class="navcta" href="/cv.pdf" target="_blank">Download CV</a>
   </div>
-  <a class="navcta" href="/cv.pdf" target="_blank">Download CV</a>
 </nav>

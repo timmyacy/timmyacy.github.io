@@ -77,6 +77,21 @@
     &.create  { color: #C9A8D1; }
     &.fork    { color: #A8B4D1; }
     &.release { color: #D18F9A; }
+    &.ci_run  { color: #8A8E96; }
+  }
+
+  .conclusion {
+    @include t.mono(10px);
+    text-transform: uppercase;
+    padding: 1px 6px;
+    flex-shrink: 0;
+    color: #8FD1A8;
+    background: rgba(143, 209, 168, 0.12);
+
+    &.failure {
+      color: #E0A08C;
+      background: rgba(224, 160, 140, 0.12);
+    }
   }
 
   .repo {

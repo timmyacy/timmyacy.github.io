@@ -22,6 +22,7 @@
     <div class="log-line" *ngFor="let item of items">
       <span class="ts">{{ item.timestamp | date: 'yyyy-MM-dd HH:mm' }}</span>
       <span class="tag" [class]="item.type">{{ typeLabel[item.type] }}</span>
+      <span class="conclusion" *ngIf="item.conclusion" [class]="item.conclusion">{{ item.conclusion === 'success' ? 'passed' : 'failed' }}</span>
       <span class="repo">{{ item.repo }}</span>
       <a class="msg" [href]="item.url" target="_blank" rel="noopener">{{ item.message }}</a>
       <span class="sha" *ngIf="item.sha">{{ item.sha }}</span>
