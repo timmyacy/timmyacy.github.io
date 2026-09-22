@@ -4,12 +4,11 @@
 </div>
 
 <p class="intro">
-  This is a live demo of the pricing engines above, actually working. A live
-  BTC and ETH spot price is pulled from CoinGecko, then priced through the
-  Black-Scholes, Monte Carlo and Merton jump-diffusion models below, right in
-  your browser. Three different pricing methods, same inputs, so if the
-  numbers land close together, that's a live check that they agree with
-  each other.
+  I pull a live BTC and ETH spot price from CoinGecko, then price it through
+  my Black-Scholes, Monte Carlo and Merton jump-diffusion engines below,
+  right here in your browser. Same inputs, three different methods I've
+  built, so if the numbers land close together, that's a live check that
+  they agree with each other.
 </p>
 
 <div class="proof-panel">
@@ -34,6 +33,6 @@
   </div>
 
   <div class="proof-note">
-    Vol and jump parameters are assumed rather than pulled from live options data, which isn't available for free without an API key. Everything else here, the spot price and all three prices, is computed live on page load.
+    I'm assuming the vol and jump parameters rather than pulling live options data, that's not available for free without an API key. Everything else here, the spot price and all three prices, is computed live when the page loads.
   </div>
 </div>
