@@ -21,8 +21,8 @@ marked.setOptions({ breaks: true });
 // Notebook-style rendering: a fenced code block renders as a syntax
 // highlighted "cell", and a fenced block tagged ```output renders as a
 // plain output box directly underneath it, same visual pattern as a
-// rendered (not live) Jupyter notebook export. No code actually runs,
-// the "output" is just whatever text you paste into that block yourself.
+// rendered (not live) Jupyter notebook export. Nothing executes, the
+// "output" is just whatever text you paste into that block yourself.
 //
 // marked.use() expects plain override functions here, not a Renderer
 // instance, an instance silently fails to hook in and falls back to the
