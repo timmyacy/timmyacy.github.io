@@ -50,6 +50,31 @@ button {
   }
 }
 
+.signed-out {
+  display: flex;
+  flex-direction: column;
+  max-width: 320px;
+
+  p { color: t.$ink-soft; font-size: .95rem; margin: 0 0 20px; }
+
+  label {
+    @include t.mono(11px);
+    color: t.$ink-soft;
+    margin: 0 0 5px;
+  }
+
+  input {
+    @include t.mono(13px);
+    padding: 8px;
+    background: t.$paper;
+    border: 1px solid t.$ink;
+    color: t.$ink;
+    margin-bottom: 16px;
+  }
+
+  button { margin-top: 4px; align-self: flex-start; }
+}
+
 .admin-head {
   display: flex;
   justify-content: space-between;

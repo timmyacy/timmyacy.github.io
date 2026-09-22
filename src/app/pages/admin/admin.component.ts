@@ -28,6 +28,11 @@ export class AdminComponent implements OnInit {
   user: User | null = null;
   loadingAuth = true;
 
+  email = '';
+  password = '';
+  signingIn = false;
+  loginError = '';
+
   posts: Post[] = [];
   loadingPosts = false;
   accessDenied = false;
@@ -52,7 +57,12 @@ export class AdminComponent implements OnInit {
   }
 
   signIn(): void {
-    this.supabase.signInWithGitHub().catch((e) => (this.errorMessage = e.message));
+    this.signingIn = true;
+    this.loginError = '';
+    this.supabase
+      .signInWithPassword(this.email, this.password)
+      .catch((e) => (this.loginError = e.message))
+      .finally(() => (this.signingIn = false));
   }
 
   signOut(): void {

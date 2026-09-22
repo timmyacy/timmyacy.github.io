@@ -16,13 +16,7 @@ export interface Post {
 
 @Injectable({ providedIn: 'root' })
 export class SupabaseService {
-  // PKCE flow returns the login token via a ?code= query param instead of
-  // a #access_token= URL fragment. The implicit flow (the SDK's default)
-  // would collide with this app's hash-based routing, since both would be
-  // fighting over the URL hash.
-  private readonly client: SupabaseClient = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
-    auth: { flowType: 'pkce' },
-  });
+  private readonly client: SupabaseClient = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 
   private readonly userSubject = new BehaviorSubject<User | null>(null);
   readonly user$: Observable<User | null> = this.userSubject.asObservable();
@@ -40,11 +34,8 @@ export class SupabaseService {
     return this.userSubject.value;
   }
 
-  async signInWithGitHub(): Promise<void> {
-    const { error } = await this.client.auth.signInWithOAuth({
-      provider: 'github',
-      options: { redirectTo: window.location.origin + window.location.pathname },
-    });
+  async signInWithPassword(email: string, password: string): Promise<void> {
+    const { error } = await this.client.auth.signInWithPassword({ email, password });
     if (error) throw error;
   }
 

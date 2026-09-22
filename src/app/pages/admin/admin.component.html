@@ -4,24 +4,32 @@
   <div class="loading mono" *ngIf="loadingAuth">checking session...</div>
 
   <ng-container *ngIf="!loadingAuth">
-    <div class="signed-out" *ngIf="!user">
+    <form class="signed-out" *ngIf="!user" (ngSubmit)="signIn()">
       <h1>Admin</h1>
-      <p>Sign in with GitHub to manage blog posts.</p>
-      <button type="button" (click)="signIn()">Sign in with GitHub</button>
-    </div>
+      <p>Sign in to manage blog posts.</p>
+
+      <label>Email</label>
+      <input type="email" name="email" [(ngModel)]="email" autocomplete="username" required>
+
+      <label>Password</label>
+      <input type="password" name="password" [(ngModel)]="password" autocomplete="current-password" required>
+
+      <div class="error mono" *ngIf="loginError">{{ loginError }}</div>
+
+      <button type="submit" [disabled]="signingIn">{{ signingIn ? 'Signing in...' : 'Sign in' }}</button>
+    </form>
 
     <div class="signed-in" *ngIf="user">
       <div class="admin-head">
         <div>
           <h1>Admin</h1>
-          <p class="mono small">signed in as {{ user.user_metadata['user_name'] || user.email }}</p>
+          <p class="mono small">signed in as {{ user.email }}</p>
         </div>
         <button type="button" class="secondary" (click)="signOut()">Sign out</button>
       </div>
 
       <div class="denied mono" *ngIf="accessDenied">
-        You're signed in with GitHub, but this account doesn't have permission to manage posts.
-        Only the site owner's account can post here.
+        This account doesn't have permission to manage posts.
       </div>
 
       <ng-container *ngIf="!accessDenied">
