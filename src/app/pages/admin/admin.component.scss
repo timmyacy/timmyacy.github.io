@@ -1,0 +1,142 @@
+@use '../../core/styles/tokens' as t;
+
+.admin-page {
+  padding: 36px 0 60px;
+  max-width: 720px;
+}
+
+.back {
+  @include t.mono(12px);
+  color: t.$ink-soft;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 24px;
+  &:hover { color: t.$ink; }
+}
+
+h1 { font-size: 1.9rem; font-weight: 600; margin: 0 0 10px; }
+
+.loading, .error, .denied {
+  @include t.mono(12px);
+  color: t.$ink-soft;
+  margin-bottom: 16px;
+}
+.error { color: t.$loss; }
+.denied { color: t.$loss; background: t.$panel; padding: 12px 14px; }
+
+button {
+  @include t.mono(12.5px);
+  padding: 9px 16px;
+  background: t.$ink;
+  color: t.$paper;
+  border: none;
+  cursor: pointer;
+
+  &:disabled { opacity: 0.5; cursor: default; }
+
+  &.secondary {
+    background: none;
+    color: t.$ink;
+    border: 1px solid t.$rule;
+  }
+
+  &.link {
+    background: none;
+    border: none;
+    color: t.$ink-soft;
+    padding: 0;
+    text-decoration: underline;
+    &.danger:hover { color: t.$loss; }
+  }
+}
+
+.admin-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid t.$rule;
+  padding-bottom: 20px;
+  margin-bottom: 24px;
+
+  .small { color: t.$ink-soft; font-size: 11.5px; }
+}
+
+.editor {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid t.$ink;
+  background: t.$panel;
+  padding: 22px;
+
+  label {
+    @include t.mono(11px);
+    color: t.$ink-soft;
+    margin: 14px 0 5px;
+    &:first-child { margin-top: 0; }
+  }
+
+  input[type="text"], textarea {
+    @include t.mono(13px);
+    padding: 8px;
+    background: t.$paper;
+    border: 1px solid t.$ink;
+    color: t.$ink;
+    resize: vertical;
+  }
+
+  input[type="file"] { @include t.mono(11.5px); }
+
+  .preview {
+    max-width: 240px;
+    max-height: 160px;
+    object-fit: cover;
+    margin-top: 10px;
+    border: 1px solid t.$rule;
+  }
+
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    input { width: auto; margin: 0; }
+  }
+
+  .editor-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+  }
+}
+
+.post-table {
+  width: 100%;
+  border-collapse: collapse;
+  @include t.mono(12px);
+  margin-top: 20px;
+
+  th {
+    text-align: left;
+    color: t.$ink-soft;
+    font-weight: 500;
+    padding: 0 8px 8px 0;
+    border-bottom: 1px solid t.$ink;
+  }
+  td {
+    padding: 8px 8px 8px 0;
+    border-bottom: 1px solid t.$rule;
+  }
+
+  .small { color: t.$ink-soft; }
+
+  .status {
+    color: t.$ink-soft;
+    &.published { color: t.$gain; }
+  }
+
+  .row-actions {
+    display: flex;
+    gap: 10px;
+    white-space: nowrap;
+  }
+}

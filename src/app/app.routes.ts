@@ -33,5 +33,17 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/projects/mlmc-demo/mlmc-demo.component').then((m) => m.MlmcDemoComponent),
   },
+  {
+    path: 'blog',
+    loadComponent: () => import('./pages/blog-list/blog-list.component').then((m) => m.BlogListComponent),
+  },
+  {
+    path: 'blog/:slug',
+    loadComponent: () => import('./pages/blog-post/blog-post.component').then((m) => m.BlogPostComponent),
+  },
+  {
+    path: 'admin',
+    loadComponent: () => import('./pages/admin/admin.component').then((m) => m.AdminComponent),
+  },
   { path: '**', redirectTo: '' },
 ];

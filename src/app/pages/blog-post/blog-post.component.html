@@ -1,0 +1,13 @@
+<div class="post-page">
+  <a class="back" routerLink="/blog">&larr; back to blog</a>
+
+  <div class="loading mono" *ngIf="loading">loading...</div>
+  <div class="not-found mono" *ngIf="notFound && !loading">Post not found.</div>
+
+  <article *ngIf="post as p">
+    <div class="post-date mono">{{ p.created_at | date: 'longDate' }}</div>
+    <h1>{{ p.title }}</h1>
+    <img *ngIf="p.cover_image_url" [src]="p.cover_image_url" [alt]="p.title" class="cover">
+    <div class="content">{{ p.content }}</div>
+  </article>
+</div>

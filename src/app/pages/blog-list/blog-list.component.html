@@ -1,0 +1,23 @@
+<div class="blog-page">
+  <a class="back" routerLink="/">&larr; back to home</a>
+
+  <div class="blog-head">
+    <h1>Blog</h1>
+    <p>Notes on the projects above, quant finance, and whatever else comes up.</p>
+  </div>
+
+  <div class="loading mono" *ngIf="loading">loading posts...</div>
+  <div class="error mono" *ngIf="error && !loading">Couldn't load posts right now, try again shortly.</div>
+  <div class="empty mono" *ngIf="!loading && !error && posts.length === 0">No posts yet, check back soon.</div>
+
+  <div class="post-list" *ngIf="!loading && !error">
+    <a class="post-card" *ngFor="let post of posts" [routerLink]="['/blog', post.slug]">
+      <img *ngIf="post.cover_image_url" [src]="post.cover_image_url" alt="">
+      <div class="post-card-body">
+        <div class="post-date mono">{{ post.created_at | date: 'longDate' }}</div>
+        <h2>{{ post.title }}</h2>
+        <p>{{ excerpt(post.content) }}</p>
+      </div>
+    </a>
+  </div>
+</div>

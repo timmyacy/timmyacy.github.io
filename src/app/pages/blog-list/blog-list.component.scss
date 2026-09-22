@@ -1,0 +1,59 @@
+@use '../../core/styles/tokens' as t;
+
+.blog-page {
+  padding: 36px 0 60px;
+}
+
+.back {
+  @include t.mono(12px);
+  color: t.$ink-soft;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 24px;
+  &:hover { color: t.$ink; }
+}
+
+.blog-head {
+  border-bottom: 1px solid t.$rule;
+  padding-bottom: 24px;
+  margin-bottom: 30px;
+
+  h1 { font-size: 1.9rem; font-weight: 600; margin: 0 0 10px; letter-spacing: -0.01em; }
+  p { font-size: 1rem; color: t.$ink-soft; margin: 0; }
+}
+
+.loading, .error, .empty {
+  color: t.$ink-soft;
+  font-size: 12px;
+}
+
+.post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: t.$rule;
+  border: 1px solid t.$rule;
+}
+
+.post-card {
+  display: flex;
+  gap: 20px;
+  background: t.$paper;
+  padding: 20px;
+  text-decoration: none;
+  color: t.$ink;
+
+  &:hover { background: t.$panel; }
+
+  img {
+    width: 140px;
+    height: 100px;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid t.$rule;
+  }
+
+  .post-date { font-size: 11px; color: t.$ink-soft; margin-bottom: 4px; }
+  h2 { font-size: 1.1rem; font-weight: 600; margin: 0 0 6px; }
+  p { font-size: .92rem; color: t.$ink-soft; line-height: 1.5; margin: 0; }
+}

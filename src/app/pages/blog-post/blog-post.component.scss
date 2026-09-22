@@ -1,0 +1,47 @@
+@use '../../core/styles/tokens' as t;
+
+.post-page {
+  padding: 36px 0 60px;
+  max-width: 720px;
+}
+
+.back {
+  @include t.mono(12px);
+  color: t.$ink-soft;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 24px;
+  &:hover { color: t.$ink; }
+}
+
+.loading, .not-found {
+  color: t.$ink-soft;
+  font-size: 12px;
+}
+
+.post-date {
+  font-size: 11px;
+  color: t.$ink-soft;
+  margin-bottom: 8px;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0 0 20px;
+  letter-spacing: -0.01em;
+}
+
+.cover {
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
+  border: 1px solid t.$rule;
+  margin-bottom: 24px;
+}
+
+.content {
+  font-size: 1.02rem;
+  line-height: 1.7;
+  white-space: pre-wrap;
+}

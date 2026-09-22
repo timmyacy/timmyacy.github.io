@@ -2,6 +2,7 @@
   <a class="navbrand" routerLink="/">Timmy Ajibode</a>
   <div class="navlinks">
     <a *ngFor="let link of links" routerLink="/" [fragment]="link.fragment">{{ link.label }}</a>
+    <a routerLink="/blog">Blog</a>
   </div>
   <a class="navcta" href="/cv.pdf" target="_blank">Download CV</a>
 </nav>

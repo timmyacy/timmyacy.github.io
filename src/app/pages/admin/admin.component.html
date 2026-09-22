@@ -1,0 +1,80 @@
+<div class="admin-page">
+  <a class="back" routerLink="/">&larr; back to home</a>
+
+  <div class="loading mono" *ngIf="loadingAuth">checking session...</div>
+
+  <ng-container *ngIf="!loadingAuth">
+    <div class="signed-out" *ngIf="!user">
+      <h1>Admin</h1>
+      <p>Sign in with GitHub to manage blog posts.</p>
+      <button type="button" (click)="signIn()">Sign in with GitHub</button>
+    </div>
+
+    <div class="signed-in" *ngIf="user">
+      <div class="admin-head">
+        <div>
+          <h1>Admin</h1>
+          <p class="mono small">signed in as {{ user.user_metadata['user_name'] || user.email }}</p>
+        </div>
+        <button type="button" class="secondary" (click)="signOut()">Sign out</button>
+      </div>
+
+      <div class="denied mono" *ngIf="accessDenied">
+        You're signed in with GitHub, but this account doesn't have permission to manage posts.
+        Only the site owner's account can post here.
+      </div>
+
+      <ng-container *ngIf="!accessDenied">
+        <div class="error mono" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+        <div class="editor" *ngIf="draft as d">
+          <label>Title</label>
+          <input type="text" [ngModel]="d.title" (ngModelChange)="onTitleChange($event)">
+
+          <label>Slug</label>
+          <input type="text" [(ngModel)]="d.slug">
+
+          <label>Cover image</label>
+          <input type="file" accept="image/*" (change)="onFileSelected($event)" [disabled]="uploading">
+          <div class="mono small" *ngIf="uploading">uploading...</div>
+          <img *ngIf="d.cover_image_url" [src]="d.cover_image_url" class="preview">
+
+          <label>Content</label>
+          <textarea rows="14" [(ngModel)]="d.content"></textarea>
+
+          <label class="checkbox-label">
+            <input type="checkbox" [(ngModel)]="d.published"> Published (visible on the public blog)
+          </label>
+
+          <div class="editor-actions">
+            <button type="button" (click)="save()" [disabled]="saving">{{ saving ? 'Saving...' : 'Save' }}</button>
+            <button type="button" class="secondary" (click)="cancelEdit()">Cancel</button>
+          </div>
+        </div>
+
+        <ng-container *ngIf="!draft">
+          <button type="button" (click)="startNew()">+ New post</button>
+
+          <div class="loading mono" *ngIf="loadingPosts">loading posts...</div>
+
+          <table class="post-table" *ngIf="!loadingPosts">
+            <thead>
+              <tr><th>Title</th><th>Status</th><th>Created</th><th></th></tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let post of posts">
+                <td>{{ post.title }}</td>
+                <td><span class="status" [class.published]="post.published">{{ post.published ? 'published' : 'draft' }}</span></td>
+                <td class="mono small">{{ post.created_at | date: 'mediumDate' }}</td>
+                <td class="row-actions">
+                  <button type="button" class="link" (click)="startEdit(post)">edit</button>
+                  <button type="button" class="link danger" (click)="remove(post)">delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-container>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>
